@@ -27,7 +27,7 @@ CodePipeline
 
 
 ## Team Members
-[Kent Ketter](https://github.com/KKetter)
-[Jhia Turner](https://github.com/jhimitu)
-[Ed Abrahamsen](https://github.com/esa2)
-[Devon Hackley](https://github.com/devonhackley)
+- [Kent Ketter](https://github.com/KKetter)
+- [Jhia Turner](https://github.com/jhimitu)
+- [Ed Abrahamsen](https://github.com/esa2)
+- [Devon Hackley](https://github.com/devonhackley)
