@@ -15,7 +15,6 @@ Stand Lee is a serverless slack app for sending reminders to a message group abo
 #### How Messages Show In The Slack Channel
 ![alt text](assets/stand-up-reminder-app.png "Logo Title Text 1")
 
-[deployed link](https://github.com/teamnotabot/reminder-bot)
 
 ## Technologies Used
 
