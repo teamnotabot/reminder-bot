@@ -37,6 +37,69 @@ Github
 
 #### production
 
+### CodePipeline
+
+The pipeline has three stages.
+
+## Source
+The source stage uses the master branch of the https://github.com/teamnotabot/reminder-bot repo.
+
+## Build
+The build stage uses an AWS Serverless Application Model template. The SAM template defines the application. The template, displayed below, specifies the lambda function location, runtime, and path of the Slack API.
+
+```
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Outputs the stand up reminder
+Resources:
+  StandupFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs10.x
+      CodeUri: ./
+      Events:
+        SlackApi:
+          Type: Api
+          Properties:
+            Path: /services
+            Method: POST
+```
+
+The build stage also uses an AWS CodeBuild build specification that installs required packages and uploads the deployment package to Amazon S3.
+
+```
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+        nodejs: 10
+  build:
+    commands:
+      - npm install https
+      - export BUCKET=lambda-deployment-artifacts-bucket
+      - aws cloudformation package --template-file template.yml --s3-bucket $BUCKET --output-template-file outputtemplate.yml
+artifacts:
+  type: zip
+  files:
+    - template.yml
+    - outputtemplate.yml
+    
+```
+
+## Deployment
+The deployment stage has an action that creates a change set for the AWS CloudFormation stack that manages the Lambda application. A change set specifies the changes that are made to the stack, such as adding new resources and updating existing resources.
+
+## Resources used by the pipeline:
+
+- GitHub
+- CodeBuild
+- S3
+- Lambda
+- IAM
+- CloudFormation
+
+
 
 ## Team Members
 - [Kent Ketter](https://github.com/KKetter)
