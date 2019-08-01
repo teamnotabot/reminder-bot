@@ -5,7 +5,7 @@ phases:
         nodejs: 10
   build:
     commands:
-      - npm install https
+      - npm install time
       - export BUCKET=lambda-deployment-artifacts-bucket
       - aws cloudformation package --template-file template.yaml --s3-bucket $BUCKET --output-template-file outputtemplate.yaml
 artifacts:
@@ -13,3 +13,4 @@ artifacts:
   files:
     - template.yaml
     - outputtemplate.yaml
+    

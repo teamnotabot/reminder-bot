@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Sends daily standup message
+Description: Outputs the time
 Resources:
   TimeFunction:
     Type: AWS::Serverless::Function
@@ -9,8 +9,9 @@ Resources:
       Runtime: nodejs10.x
       CodeUri: ./
       Events:
-        SlackApi:
+        MyTimeApi:
           Type: Api
           Properties:
-            Path: /services
-            Method: POST
+            Path: /TimeResource
+            Method: GET
+            
