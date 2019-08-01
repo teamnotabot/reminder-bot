@@ -1,23 +1,39 @@
-'use strict'
+const https = require('https');
 
-postData('https://hooks.slack.com/services/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', {text: 'Hello World'})
-  .then(data => console.log(JSON.stringify(data))) // JSON-string from `response.json()` call
-  .catch(error => console.error(error));
+const doPostRequest = () => {
 
-function postData(url = '', data = {}) {
-  // Default options are marked with *
-    return fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, cors, *same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-            'Content-Type': 'application/json',
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        redirect: 'follow', // manual, *follow, error
-        referrer: 'no-referrer', // no-referrer, *client
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
-    })
-    .then(response => response.json()); // parses JSON response into native JavaScript objects 
-}
+  const data = {text: 'Daily standup is in 15 minutes!'}
+
+  return new Promise((resolve, reject) => {
+    const options = {
+      host: 'hooks.slack.com',
+      path: '/services/TLVG4HE9W/BLS090RUZ/fTeQwqpsi3svcEva72JqV2yU',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    //create the request object with the callback with the result
+    const req = https.request(options, (res) => {
+      resolve(JSON.stringify(res.statusCode));
+    });
+
+    // handle the possible errors
+    req.on('error', (e) => {
+      reject(e.message);
+    });
+
+    //do the request
+    req.write(JSON.stringify(data));
+
+    //finish the request
+    req.end();
+  });
+};
+
+exports.handler = async (event) => {
+  await doPostRequest()
+    .then(result => console.log(`Status code: ${result}`))
+    .catch(err => console.error(`Error doing the request for the event: ${JSON.stringify(event)} => ${err}`));
+};
