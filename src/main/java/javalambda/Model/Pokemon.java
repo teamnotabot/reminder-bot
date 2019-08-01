@@ -5,20 +5,12 @@ public class Pokemon {
     private String name;
     private int order;
 
-    public Pokemon() {}
+    public int getOrder() {
+        return order;
+    }
 
-    public Pokemon(int id, String name, int order){
-        this.id = id;
-        this.name = name;
+    public void setOrder(int order) {
         this.order = order;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -29,11 +21,19 @@ public class Pokemon {
         this.name = name;
     }
 
-    public int getOrder() {
-        return order;
+    public int getId() {
+        return id;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setId(int id) {
+        this.id = id;
     }
+
+    public Pokemon() {}
+
+    public Pokemon(int id){
+        this.id = id;
+    }
+
+
 }

@@ -11,11 +11,14 @@ import javalambda.Model.request.LexRequest;
 import javalambda.Model.response.DialogAction;
 import javalambda.Model.response.LexResponse;
 import javalambda.Model.response.Message;
+
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.io.BufferedReader;
 import java.net.URL;
 import java.util.Map;
 import com.google.gson.Gson;
+
 
 public class App {
     /**
@@ -24,45 +27,66 @@ public class App {
      * @param context
      * @return
      */
+    String inputPokemon;
+    Message message;
+    DialogAction dialogAction;
     public LexResponse myHandler(LexRequest lexRequest, Context context) {
         // Grab slots i.e user inputs from lex request obj
         Map<String, String> slots = lexRequest.getCurrentIntent().getSlots();
-        String inputPokemon = "";
-        String inputPokemonFact = "";
-        Message message = new Message();
-
         // Itereate thru slots to grab user inputs
         for(Map.Entry<String, String> slot : slots.entrySet()){
-            if(slot.getKey().contains("Pokemon")){
+            if(slot.getKey().contains("Pokemon") && !slot.getKey().contains("Fact")){
                 inputPokemon = slot.getValue();
             }
-            if(slot.getKey().contains("PokemonFact")){
-                inputPokemonFact = slot.getValue();
-            }
         }
 
-        // http request
-        Gson gson = new Gson();
-        try {
-            URL url = new URL("http://pokeapi.co/api/v2/pokemon/"+inputPokemon+"/");
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            BufferedReader reader = new BufferedReader(new InputStreamReader((con.getInputStream())));
-            Pokemon pokemon = gson.fromJson(reader, Pokemon.class);
-            message.setContentType("PlainText");
-            message.setContent(String.valueOf(pokemon.getOrder()));
-        } catch(IOException ex) {
-            System.out.println("An error occurred");
-        }
-
-        System.out.println("message" + message.getContent());
+        System.out.println("input " + inputPokemon);
 
         // Build out response object: Message --> DialogAction --> LexResponse
-        DialogAction dialogAction = new DialogAction("Close", "Fulfilled", message);
+        try {
+            // http request
+            message = requestHandler(inputPokemon);
+            dialogAction = new DialogAction("Close", "Fulfilled", message);
 
+        } catch (Exception ex){
+            ex.printStackTrace();
+            dialogAction = new DialogAction("Close", "Failed", new Message("PlainText", ""));
+        }
         LexResponse lex = new LexResponse(dialogAction);
         LambdaLogger logger = context.getLogger();
-        logger.log("Pokemon Facts: " + lex.getDialogAction().getMessage().getContent());
+        logger.log("Finished grabbing Pokemon facts: " + lex.getDialogAction().getMessage().getContent());
         return lex;
+    }
+
+
+
+    public Message requestHandler(String input){
+        System.out.println("In request handler");
+        Gson gson = new Gson();
+        try {
+            System.out.println("in try");
+            String pokeURL = "https://pokeapi.co/api/v2/pokemon/"+input;
+            URL url = new URL(pokeURL);
+            System.out.println("url" + url.getPath());
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            System.out.println("Connection open");
+            con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.29 Safari/537.36");
+            int status = con.getResponseCode();
+            System.out.println("Status Code: " + status);
+            BufferedReader reader = new BufferedReader(new InputStreamReader((con.getInputStream())));
+            Pokemon pokemon = gson.fromJson(reader, Pokemon.class);
+            Message message1 = new Message("PlainText",  input + "'s Pokédex number" + " is " + String.valueOf(pokemon.getId()));
+            System.out.println("finished in handler" + message1.getContent());
+            return message1;
+        } catch(IOException ex) {
+            System.out.println("An error occurred" + ex);
+            ex.printStackTrace();
+            return new Message("PlainText", "");
+        } catch(NullPointerException ex) {
+            System.out.println("An error occurred" + ex);
+            ex.printStackTrace();
+            return new Message("PlainText", "");
+        }
     }
 }
 
