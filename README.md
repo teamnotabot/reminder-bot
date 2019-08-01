@@ -1,22 +1,35 @@
-# reminder-bot
+# Stand Lee (AKA reminder-bot)
 ## Overview
-An amazon chime bot for reminding a message group of group-specific events of medium significance.
+Stand Lee is a serverless slack app for sending reminders to a message group about important upcoming events and for providing general team-specific information upon request.
 
 ## Architecture
 
-## <-- Screenshots of app go here -->
+#### Reminder Feature
+
+![alt text](assets/architecture-1.png "Reminder feature architecture diagram")
+
+#### Information Feature
+
+![alt text](assets/architecture-02.png "Reminder feature architecture diagram")
+
+#### How Messages Show In The Slack Channel
+![alt text](assets/stand-up-reminder-app.png "Logo Title Text 1")
 
 [deployed link](https://github.com/teamnotabot/reminder-bot)
 
 ## Technologies Used
+
+#### AWS Services
 Amazon Lex
-Amazon Chime
 Amazon Connect
 Lambda
 Cloudwatch
 IAM
 CodePipeline
 
+#### APIs
+Slack
+Github
 
 ## How to get up and running
 
