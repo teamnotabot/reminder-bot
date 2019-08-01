@@ -39,14 +39,9 @@ public class App {
             content = "Open issues ----->   ";
             ArrayList<Attachment> cards = new ArrayList<>();
             Attachment[] attachments = new Attachment[orgIssue.getIssues().size()];
-            ResponseButton[] buttons = new ResponseButton[]{};
             for(Issue issue : orgIssue.getIssues()){
                 String assignTo = issue.getAssignee() == null ? "None" : issue.getAssignee().getLogin();
-                ArrayList<ResponseButton> tempBtns = new ArrayList<>();
-                ResponseButton btn = new ResponseButton("Link to Issue", issue.getHtml_url());
-                tempBtns.add(btn);
-                buttons = tempBtns.toArray(buttons);
-                cards.add(new Attachment(issue.getTitle(), assignTo, "https://avatars2.githubusercontent.com/u/53444244?v=4", ""+issue.getHtml_url(), buttons));
+                cards.add(new Attachment(issue.getTitle(), assignTo, "https://avatars2.githubusercontent.com/u/53444244?v=4", ""+issue.getHtml_url()));
             }
             attachments = cards.toArray(attachments);
             dialogAction = new DialogAction("Close", "Fulfilled", new Message("PlainText", content), new ResponseCard(1, "application/vnd.amazonaws.card.generic", attachments));

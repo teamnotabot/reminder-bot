@@ -49,6 +49,13 @@ public class Attachment {
 
     public Attachment() {}
 
+    public Attachment(String title, String subTitle, String imageUrl, String attachmentLinkUrl) {
+        this.title = title;
+        this.subTitle = subTitle;
+        this.imageUrl = imageUrl;
+        this.attachmentLinkUrl = attachmentLinkUrl;
+    }
+
     public Attachment(String title, String subTitle, String imageUrl, String attachmentLinkUrl, ResponseButton[] buttons) {
         this.title = "Title: "+title;
         this.subTitle = "Assigned to: "+subTitle;
