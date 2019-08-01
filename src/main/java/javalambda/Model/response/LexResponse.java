@@ -4,6 +4,7 @@ import javalambda.Model.response.DialogAction;
 
 import java.util.Map;
 
+// Resource: https://github.com/arun-gupta/lex-java
 public class LexResponse {
     Map<String, String> sessionAttributes;
     private DialogAction dialogAction;

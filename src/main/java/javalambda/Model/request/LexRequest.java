@@ -5,6 +5,7 @@ import javalambda.Model.request.Intent;
 
 import java.util.Map;
 
+// Resource: https://github.com/arun-gupta/lex-java
 public class LexRequest {
     private String messageVersion;
     private String invocationSource;

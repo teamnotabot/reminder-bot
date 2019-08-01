@@ -1,9 +1,10 @@
 package javalambda.Model.response;
 
 public class DialogAction {
-    private String type;
-    private String fulfillmentState;
-    private Message message;
+    protected String type;
+    protected String fulfillmentState;
+    protected Message message;
+    protected ResponseCard responseCard;
 
     public DialogAction() {}
 
@@ -11,6 +12,21 @@ public class DialogAction {
         this.type = type;
         this.fulfillmentState = fulfillmentState;
         this.message = message;
+    }
+
+    public DialogAction(String type, String fulfillmentState, Message message, ResponseCard responseCard) {
+        this.type = type;
+        this.fulfillmentState = fulfillmentState;
+        this.message = message;
+        this.responseCard = responseCard;
+    }
+
+    public ResponseCard getResponseCard() {
+        return responseCard;
+    }
+
+    public void setResponseCard(ResponseCard responseCard) {
+        this.responseCard = responseCard;
     }
 
     public String getType() {
