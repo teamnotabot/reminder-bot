@@ -19,6 +19,18 @@ Stand Lee is a serverless slack app for sending reminders to a message group abo
 ![alt text](assets/issues-github.png)
 &emsp;
 
+### How to interact with Stand Lee
+
+You can interact with Stand Lee first by being added to the current slack channel, or by being a channel admin and adding Stand Lee's [Postback URL](https://docs.aws.amazon.com/lex/latest/dg/slack-bot-back-in-slack-console.html), and adding the appropriate configuration.
+
+##### Commands you can run with Stand Lee
+You can pretty much ask Stand Lee in multiple variations of the following commands: 
+
+  - Say hello
+  - Ask about the wifi
+  - Ask about open issues on github
+  - Thank you
+
 
 ## Technologies Used
 
