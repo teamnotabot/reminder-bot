@@ -14,30 +14,26 @@ Stand Lee is a serverless slack app for sending reminders to a message group abo
 
 #### How Messages Show In The Slack Channel
 ![alt text](assets/stand-up-reminder-app.png "Logo Title Text 1")
+&emsp;
+&emsp;
+![alt text](assets/issues-github.png)
+&emsp;
 
 
 ## Technologies Used
 
 #### AWS Services
-Amazon Lex
-Amazon Connect
-Lambda
-Cloudwatch
-IAM
+Amazon Lex |
+Lambda  |
+Cloudwatch  |
+IAM  |
 CodePipeline
 
 #### APIs
-Slack
+Slack  |
 Github
 
-## How to get up and running
-
-#### local development
-
-
-#### production
-
-### CodePipeline
+## CodePipeline
 
 The pipeline has three stages.
 
@@ -99,8 +95,12 @@ The deployment stage has an action that creates a change set for the AWS CloudFo
 - IAM
 - CloudFormation
 
-
-
+## Helpful Documentation
+ - [Amazon Lex Developer Guide](https://docs.aws.amazon.com/lex/latest/dg/what-is.html)
+ - [Github Search API](https://developer.github.com/v3/search/#constructing-a-search-query)
+ - [Slack API](https://api.slack.com/)
+ - [Integrating Lex with Slack](https://docs.aws.amazon.com/lex/latest/dg/slack-bot-association.html)
+  
 ## Team Members
 - [Kent Ketter](https://github.com/KKetter)
 - [Jhia Turner](https://github.com/jhimitu)
