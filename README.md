@@ -86,6 +86,11 @@ artifacts:
 ## Deployment
 The deployment stage has an action that creates a change set for the AWS CloudFormation stack that manages the Lambda application. A change set specifies the changes that are made to the stack, such as adding new resources and updating existing resources.
 
+
+## Pipeline stages
+![alt text](assets/cpFlow.png "Pipeline architecture diagram")
+
+
 ## Resources used by the pipeline:
 
 - GitHub
