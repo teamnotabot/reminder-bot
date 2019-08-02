@@ -4,15 +4,15 @@ Stand Lee is a serverless slack app for sending reminders to a message group abo
 
 ## Architecture
 
-#### Reminder Feature
+### Reminder Feature
 
 ![alt text](assets/architecture-1.png "Reminder feature architecture diagram")
 
-#### Information Feature
+### Information Feature
 
 ![alt text](assets/architecture-02.png "Reminder feature architecture diagram")
 
-#### How Messages Show In The Slack Channel
+### How Messages Show In The Slack Channel
 ![alt text](assets/stand-up-reminder-app.png "Logo Title Text 1")
 &emsp;
 &emsp;
@@ -23,15 +23,15 @@ Stand Lee is a serverless slack app for sending reminders to a message group abo
 ## Technologies Used
 
 #### AWS Services
-Amazon Lex |
+| Amazon Lex |
 Lambda  |
 Cloudwatch  |
 IAM  |
-CodePipeline
+CodePipeline |
 
 #### APIs
-Slack  |
-Github
+| Slack  |
+Github |
 
 ## CodePipeline
 
